@@ -4,8 +4,8 @@ const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const port = process.env.PORT || 3000;
-const server = `http://localhost:${port}`;
-
+// const server = `http://localhost:${port}`;
+const server = 'https://testcheckfiletype.herokuapp.com'
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
