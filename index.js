@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
-const port = 8000;
+const port = process.env.PORT || 8000;
 const server = `http://localhost:${port}`;
 
 let storage = multer.diskStorage({
