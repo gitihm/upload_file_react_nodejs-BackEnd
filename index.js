@@ -58,7 +58,9 @@ app.post("/upload", (req, res) => {
 app.get("/upload/:path", (req, res) => {
   return res.sendFile(req.params.path, { root: "uploads/" });
 });
-
+app.get('/',(req,res)=>{
+    res.json({message:`server running ${port}`})
+})
 app.listen(port, err => {
   if (err) throw err;
   console.log(`> Ready on http://localhost:${port}`);
