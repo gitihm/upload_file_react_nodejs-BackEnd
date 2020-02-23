@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
+const fs = require('fs');
 const port = process.env.PORT || 3000;
 // const server = `http://localhost:${port}`;
 const server = 'https://testcheckfiletype.herokuapp.com'
@@ -57,6 +58,19 @@ app.post("/upload", (req, res) => {
 });
 app.get("/upload/:path", (req, res) => {
   return res.sendFile(req.params.path, { root: "uploads/" });
+});
+app.get("/list", (req, res) => {
+  const directoryPath = path.join(__dirname, 'uploads');
+  fs.readdir(directoryPath, function (err, files) {
+    if (err) {
+        return console.log('Unable to scan directory: ' + err);
+    } 
+    let objfile = []
+    files.forEach(element => {
+      objfile.push({name:element , url:`${server}/upload/${element}`})
+    });
+    res.json({list:objfile.reverse()})
+});
 });
 app.get('/',(req,res)=>{
     res.json({message:`server running ${port}`})
